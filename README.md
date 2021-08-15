@@ -1,6 +1,6 @@
 # Network Manager
 
-**Used technologies:** *Python, Django
+**Used technologies:** *Python, Django*
 
 ## Description
 
