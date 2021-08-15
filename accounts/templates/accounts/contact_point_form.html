@@ -1,0 +1,33 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card card-body">
+
+            <form method="POST">
+                {%  csrf_token %}
+
+                {% if formset %}
+                    {{formset.management_form}}
+                    {% for form in formset %}
+                        <table class="table table-sm">
+                            {{form.as_table}}
+                        </table>
+                    {% endfor %}
+                {% endif %}
+
+                {% if form %}
+                    <table class="table table-sm">
+                        {{form.as_table}}
+                    </table>
+                {% endif %}
+
+                <input type="submit" name="Submit">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

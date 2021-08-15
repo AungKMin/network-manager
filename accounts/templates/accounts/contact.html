@@ -1,0 +1,105 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+    <style>
+        .profile-pic{
+            max-width: 100%;
+            max-height:100%;
+            margin: 0 auto;
+            border-radius: 50%;
+        }
+    </style>
+
+    <br> 
+
+    <div class="row" style="display: flex">
+        <div class="col-md"> 
+            <div class="card card-body">
+                <h5>Edit Contact</h5>
+                <hr>
+                <a class="btn btn-primary btn-sm btn-block" href="{% url 'contact_settings' contact.id %}">update contact</a>
+                <div style="height:10px"></div>
+                <a class="btn btn-primary btn-sm btn-block" href="{% url 'create_contact_point' contact.id %}">add or update contact points</a>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="card card-body">
+                <div class="row"> 
+                    <h5>Contact Information</h5>
+                    <hr>
+                    <div class="col-4"> 
+                        {% if contact and contact.profile_pic %}
+                            <img class="profile-pic" src="{{contact.profile_pic.url}}" aria-label="Profile picture">
+                        {% endif %}
+                    </div>
+                    <div class="col-8">
+                        <p>Name: {{contact.name}}</p>
+                        <p>Organization: {{contact.organization}}</p>
+                        <p>Description: {{contact.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>Total Times Contacted</h5>
+                <hr>
+                <h1 style="text-align: center; padding: 10px">{{ times_contacted }}</h1>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <!-- <div class="row">
+        <div class="col">
+            <div class="card card-body">
+                <form method="get">
+                    {{ contact_point_filter.form }}
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </div> -->
+
+    <br>
+
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body"> 
+                <h5>Contact Points</h5>
+                <hr>
+                <table class="table table-sm">
+                    <tr>
+                        <th>Method</th>
+                        <th>Link</th>
+                        <th>Notes</th>
+                        <th>Date Started</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                        <th>Remove</th>
+                    </tr>
+
+                        {% for contact_point in contact_points %}
+                            <tr>
+                                <td>{{ contact_point.contact_point_method }}</td>
+                                <td>{{ contact_point.link }}</td>
+                                <td>{{ contact_point.notes }}</td>
+                                <td>{{ contact_point.date_created }}</td>
+                                <td>{{ contact_point.status }}</td>
+                                <td>
+                                    <a class="btn btn-sm btn-primary" href="{% url 'update_contact_point' contact_point.id %}">Update</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-sm btn-danger" href="{% url 'delete_contact_point' contact_point.id %}">Delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                </table>
+            </div>
+        </div> 
+    </div>
+
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+{% include 'accounts/status.html' %}
+
+<br>
+
+<div class="row">
+    <div class="col-md-7">
+        
+        <div class="row">
+            <div class="col">
+                <div class="card card-body">
+                    <h5>CONTACTS</h5>
+                    <hr>
+                    <a class="btn btn-primary btn-sm btn-block" href="{% url 'create_contact' %}">Create Contact</a>
+                    <br>
+                    <form method="get">
+                        <table class="table table-sm">
+                            {{ contact_filter.form.as_table }}
+                        </table>
+                        <button class="btn btn-danger btn-sm btn-block" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <br>
+    
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th></th>
+                    <th>Contact</th>
+                    <th>Description</th>
+                    <th>Tags</th>
+                </tr>
+
+                {% for contact in contacts %}
+                    <tr>
+                        <td><a class="btn btn-sm btn-primary" href="{% url 'contact' contact.id %}">View</a></td>
+                        <td>{{contact.name}}</td>
+                        <td>{{contact.description}}</td>
+                        <td>
+                            {% for contact_tag in contact.contact_tags.all %}    
+                                <p style="display: inline">{{contact_tag}}, </p>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-5">
+        <div class="card card-body">
+            <h5>LAST 5 CONTACTS POINTS</h5>
+            <hr>
+            <table class="table table-sm">
+                <tr>
+                    <th>Contact</th>
+                    <th>Method</th>
+                    <th>Link</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+
+                {% for contact_point in contact_points %}
+                    <tr>
+                        <td>{{contact_point.contact.name}}</td>
+                        <td>{{contact_point.contact_point_method}}</td>
+                        <td>{{contact_point.link}}</td>
+                        <td>{{contact_point.status}}</td>
+                        <td>
+                            <a class="btn btn-sm btn-primary" href="{% url 'update_contact_point' contact_point.id %}">Update</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-danger" href="{% url 'delete_contact_point' contact_point.id %}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-body">
+                    <div style="display: flex; flex-direction: row; justify-content: space-around; font-size: medium; font-weight: bold">
+                        Start by creating contact tags (type of connections you can have) and contact point methods (email, phone, etc)
+                    </div>
+                    <br>
+                    <div style="display: flex; flex-direction: row; justify-content: space-around;">
+                        <a class="btn btn-md btn-warning" href="{% url 'update_contact_tags' %}">Update Contact Tags</a>
+                        <a class="btn btn-md btn-warning" href="{% url 'update_contact_point_methods' %}">Update Contact Point Methods</a> 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+{% endblock %}

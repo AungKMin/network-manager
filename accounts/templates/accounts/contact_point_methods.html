@@ -1,0 +1,32 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+    <br>
+
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body"> 
+                <h5>Contact Point Methods</h5>
+            </div>
+            <div class="card card-body">
+                <table class="table">
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                        <th>Average hours for response</th>
+                    </tr>  
+
+                    {% for i in contact_point_methods %}
+                        <tr>
+                            <td>{{ i.name }}</td>
+                            <td>{{ i.description }}</td>
+                            <td>{{ i.hours_for_response }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

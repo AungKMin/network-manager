@@ -1,0 +1,20 @@
+/* #logo{
+
+} */
+
+body { 
+    background-color: #ebeff5;
+}
+
+#total-contact-points { 
+    background-color: #7cd1c0;
+}
+
+#executed-contact-points { 
+    background-color: #4cb4c7;
+}
+
+#responded-contact-points { 
+    background-color: #ff6961;
+}
+
