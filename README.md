@@ -1,5 +1,9 @@
 # Network Manager
 
+Demo link: https://devpost.com/software/network-manager
+
+Hosted here: https://network-managr.herokuapp.com/
+
 **Used technologies:** *Python, Django*
 
 ## Description
